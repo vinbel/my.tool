@@ -1,6 +1,9 @@
 <?php
 
-class mcryptExt {
+/**
+ * Class mcrypt
+ */
+class mcrypt {
 
     /**加密
      * @param $input

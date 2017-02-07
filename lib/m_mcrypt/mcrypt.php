@@ -1,9 +1,10 @@
 <?php
+namespace lib\m_mcrypt;
 
 /**
  * Class mcrypt
  */
-class mcrypt {
+class m_mcrypt {
 
     /**加密
      * @param $input

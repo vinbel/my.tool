@@ -18,7 +18,11 @@ function __autoload($class_name) {
     }
 }
 
-
+/**
+ * 读所有文件
+ * @param $dir
+ * @return array
+ */
 function read_dirs($dir) {
     $arr = array();
 
@@ -42,4 +46,27 @@ function read_dirs($dir) {
 
         return $arr;
     }
+}
+
+/**
+ * write log to anywhere
+ * @param $content
+ * @param null $file
+ */
+function log_to($content, $file = null) {
+    if(!$file) {
+        $url = $_SERVER['PHP_SELF'];
+        $url = str_replace('\\', '/', $url);
+        $arr = explode('/',$url);
+        $filename = end($arr);
+        $file = WEB_ROOT.'log/' . $filename . '/'. date('Ymd').'.log';
+    }
+
+    $dir = dirname($file);
+
+    if(!is_dir($dir)) {
+        mkdir($dir, '0777', 1);
+    }
+
+    error_log($content, 3, $file);
 }

@@ -1,8 +1,9 @@
 <?php
 namespace lib\m_mcrypt;
-
 /**
- * Class mcrypt
+ * simple encryption and decryption
+ * Class m_mcrypt
+ * @package lib\m_mcrypt
  */
 class m_mcrypt {
 

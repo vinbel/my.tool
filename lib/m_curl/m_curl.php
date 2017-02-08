@@ -1,6 +1,11 @@
 <?php
 namespace lib\m_curl;
 
+/**
+ * simple curl just so so
+ * Class m_curl
+ * @package lib\m_curl
+ */
 class m_curl {
     /**
      * @var resource
@@ -16,6 +21,8 @@ class m_curl {
     public $method = '1'; //1 get 2 post
     public $file_name = '';
     public $flie_path = './';
+    public $file_type = 'tmp';
+    public $ignore_https = 1;
 
     public function __construct()
     {
@@ -52,7 +59,19 @@ class m_curl {
     }
 
     public function make_file_name() {
-        return date('Y_m_d_H_i_s'.rand(10000, 99999)) . '.tmp';
+        $this->get_file_type();
+        return date('Y_m_d_H_i_s'.rand(10000, 99999)) . '.' . $this->file_type;
+    }
+
+    public function get_file_type() {
+
+        $path = pathinfo($this->url);
+        $file_type = isset($path['extension']) ? $path['extension'] : '';
+
+        if($file_type) {
+            $this->file_type = $file_type;
+        }
+
     }
 
     public function make_file_path($path) {
@@ -99,6 +118,7 @@ class m_curl {
     }
 
     public function set_options() {
+        $this->check_url();
         $this->set_opt(CURLOPT_URL, $this->url);
         $this->set_opt(CURLOPT_TIMEOUT, $this->timeout);
         $this->set_opt(CURLOPT_HTTPHEADER, $this->header);
@@ -109,6 +129,15 @@ class m_curl {
             $this->set_opt(CURLOPT_POST, 1);
             $this->set_opt(CURLOPT_POSTFIELDS, $this->data);
         }
+    }
+
+    public function check_url() {
+        $preg = '/^https(.+)/';
+
+        if(preg_match($preg, $this->url) && $this->ignore_https) {
+            $this->set_opt(CURLOPT_SSL_VERIFYPEER, false);
+        }
+
     }
 
     public function to_set_cookie() {

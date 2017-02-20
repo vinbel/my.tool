@@ -1,5 +1,5 @@
 <?php
-namespace lib\m_zh_to_pinyin;
+namespace lib\m_zh2py;
 /**
  * PHP 汉字转拼音
  * @author from internet

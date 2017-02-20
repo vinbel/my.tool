@@ -1,7 +1,16 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
 <form method="post">
     <input name="py"/>
     <input type="submit" value="生成"/>
 </form>
+</body>
+
+</html>
+
 <?php
 define('WEB_ROOT', __DIR__ . '/');
 require_once WEB_ROOT . 'common.php';

@@ -37,7 +37,7 @@ class m_router{
     }
 
     public function run() {
-        $file = MODULE . $this->module .'/controller/'. $this->controller . '.php';
+        $file = MODULE . $this->module .'/controller/'. $this->controller . '_controller.php';
 
         try{
             if(!is_file($file)) {

@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/2/20
- * Time: 18:25
- */
+
+class index_model extends \core\m_model\m_model {
+
+}

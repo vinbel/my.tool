@@ -5,7 +5,7 @@ return $db = array(
         'host' => '127.0.0.1',
         'user' => 'root',
         'pwd' => 'root',
-        'database' => 'new_tiku',
+        'database' => 'pgot',
         'charset' => 'utf8',
     )
 );

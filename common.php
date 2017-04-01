@@ -1,4 +1,5 @@
 <?php
+$db = require_once WEB_ROOT . 'conf/db.conf.php';
 /**
  * 简单写了个自动加载
  * @param $class_name 类名 带 命名空间
@@ -60,6 +61,8 @@ function log_to($content, $file = null) {
         $arr = explode('/',$url);
         $filename = end($arr);
         $file = WEB_ROOT.'log/' . $filename . '/'. date('Ymd').'.log';
+    } else {
+        $file = WEB_ROOT.'log/' . $file . '/'. date('Ymd').'.log';
     }
 
     $dir = dirname($file);
@@ -69,4 +72,9 @@ function log_to($content, $file = null) {
     }
 
     error_log($content, 3, $file);
+}
+
+function get_db() {
+    global $db;
+    return $db;
 }

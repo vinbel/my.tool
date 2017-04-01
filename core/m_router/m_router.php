@@ -37,7 +37,7 @@ class m_router{
     }
 
     public function run() {
-        $file = MODULE . $this->module .'/controller/'. $this->controller . '_controller.php';
+        $file = MODULE . $this->module .'/controller/'. $this->controller . '.php';
 
         try{
             if(!is_file($file)) {
@@ -46,7 +46,8 @@ class m_router{
 
             require_once $file;
             $act = 'act_' . $this->action;
-            $controller = new $this->controller;
+            $c = $this->controller .'_controller';
+            $controller = new $c;
             $controller->router = $this;
 
             if(!method_exists($controller, $act)) {

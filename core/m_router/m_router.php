@@ -49,6 +49,7 @@ class m_router{
             $c = $this->controller .'_controller';
             $controller = new $c;
             $controller->router = $this;
+            $controller->load_module($this->module);
 
             if(!method_exists($controller, $act)) {
                 throw new \Exception("action is not found!");

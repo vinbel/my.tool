@@ -1,5 +1,5 @@
 <?php
-namespace m_excel;
+namespace lib\m_excel;
 class m_excel{
     public $data = array();
 

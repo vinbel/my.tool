@@ -17,6 +17,12 @@ class index_controller extends \core\m_controller\m_controller
         $this->load_header_view();
         $this->view('index/index', array('a' =>'123'));
         $this->load_footer_view();
+//        $this->json_view(array(11 => ''));
+        $this->display();
+    }
+
+    function act_haha() {
+        $this->text_view("haha");
         $this->display();
     }
 }

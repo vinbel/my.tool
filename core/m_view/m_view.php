@@ -7,6 +7,12 @@ class m_view {
     {
     }
 
+    /**
+     * load view
+     * @param $name
+     * @param $param
+     * @return string
+     */
     public function load_view($name, $param) {
         $module = 'index';
         $view_arr = explode('/', $name);

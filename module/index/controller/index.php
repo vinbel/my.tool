@@ -4,11 +4,16 @@ class index_controller extends \core\m_controller\m_controller
 {
     function act_index() {
         echo "hellow, world!";
-        $model = new \core\m_model\m_model();
-        $data = $model->db->fetch_all('select * from pgot_plan where report_id=? and plan=?', array(1,'呵呵呵呵'));
-//        $data = $model->db->update('pgot_school', array('id' => '5'), array('name' => '111'));
-//        $data = $model->db->insert('pgot_school', array('name' => '111'));
-        var_dump($data);
+        $model = $this->load_model('user');
+        $limit = $model->get_limit(1, 10);
+//        $data = $model->find_all('', "*", 'id desc', $limit);
+//        $data = $model->find('', "*");
+//        var_dump($data);
+//        $data = $model->db->fetch_all('select * from `user` where id=? and name=?', array(1,'111'));
+//        $data = $model->db->update('user', array('id' => '5'), array('name' => '111'));
+//        var_dump($data);
+//        $data = $model->db->insert('user', array('name' => '111'));
+//        var_dump($data);
 
     }
 }

@@ -13,8 +13,7 @@ class m_db {
         $this->db_name = $db_name;
         $db = $this->get_db($db_name);
         $dns = $db['type'] . ':host=' . $db['host'] . ';dbname=' . $db['database'];
-//        phpinfo();
-        var_dump($dns);
+
         try{
             $this->db = new \PDO($dns, $db['user'], $db['pwd'], array());
             $this->db->exec('set names '. $db['charset']);

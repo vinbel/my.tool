@@ -6,18 +6,19 @@
     Please smile if you find spelling mistakes.
     Best wish for you!
 
-###conf
+#conf
     some config files,
-###core
+#core
     core files
-###lib
+#lib
     lib files
-###module
+#module
     module
-###protected
+#protected
     some protected files
-###common.php
+#common.php
     public func file
-###index.php
+#index.php
      entrance file
-###init.sql
+#init.sql
+    some sql on init

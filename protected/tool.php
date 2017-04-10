@@ -1,7 +1,7 @@
 <?php
-define('WEB_ROOT', __DIR__. '/');
+define('WEB_ROOT', __DIR__ . 'tool.php/');
 define('DEBUG', true);
-require_once WEB_ROOT.'common.php';
+require_once WEB_ROOT . 'common.php';
 define('MODULE', WEB_ROOT . 'module/');
 $op = isset($_REQUEST['op']) ? $_REQUEST['op'] : '';
 

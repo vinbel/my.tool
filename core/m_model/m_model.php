@@ -57,9 +57,14 @@ class m_model {
             $sql = rtrim($sql, ' WHERE');
         } elseif(is_array($param)) {
             foreach($param as $k => $v) {
-                $sql .= " `{$k}`='{$v}', ";
+                if($v === false) {
+                    $sql = "{$k} AND ";
+                } else {
+                    $sql .= " `{$k}`='{$v}' AND ";
+                }
             }
-            $sql = rtrim($param, ', ');
+
+            $sql = rtrim($param, 'AND ');
         } else {
             $sql .= " `{$this->_pk}`='{$param}'";
         }
@@ -97,9 +102,14 @@ class m_model {
             $sql = rtrim($sql, ' WHERE');
         } elseif(is_array($param)) {
             foreach($param as $k => $v) {
-                $sql .= " `{$k}`='{$v}', ";
+                if($v === false) {
+                    $sql = "{$k} AND ";
+                } else {
+                    $sql .= " `{$k}`='{$v}' AND ";
+                }
             }
-            $sql = rtrim($sql, ', ');
+
+            $sql = rtrim($sql, 'AND ');
         } else {
             $sql .= " `{$this->_pk}`='{$param}'";
         }

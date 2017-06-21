@@ -111,6 +111,12 @@ class m_router{
                 break;
         }
 
+        if(!$this->module) $this->module = 'index';
+
+        if(!$this->controller) $this->controller = 'index';
+
+        if(!$this->action) $this->action = 'index';
+
         $_REQUEST['m'] = $_GET['m'] = $this->module;
         $_REQUEST['c'] = $_GET['c'] = $this->controller;
         $_REQUEST['a'] = $_GET['a'] = $this->action;

@@ -1,3 +1,4 @@
 <?php
-echo $a;
+echo 'hello,world';
 ?>
+

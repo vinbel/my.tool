@@ -144,4 +144,69 @@ class m_controller {
 
     }
 
+    /**
+     * create url
+     * @param string $url 'module/controller/action'
+     * @param array $param
+     * @param int $type
+     *  case 1 index.php?m=x&c=x&a=x
+     *  case 2 index.php?r=/m/c/a
+     *  case 3 /m/c/a/p1/p1v
+     * @return string
+     */
+    public function create_url($url, $param = array(), $type = 3) {
+        $url = ltrim($url, '/');
+        $url_arr = explode('/', $url);
+        $len = count($url_arr);
+
+        if($len < 3) {
+            return '';
+        }
+
+        for ($i = 3; $i < $len; $i += 2) {
+            $v_key = $i + 1;
+
+            if(isset($url_arr[$v_key])) {
+                $param[$url_arr[$i]] = $url_arr[$v_key];
+            } else {
+                $param[$url_arr[$i]] = '';
+            }
+        }
+
+        $new = '';
+
+        switch ($type) {
+            case 1:
+                $new = "/index.php?m={$url_arr[0]}&c={$url_arr[1]}&a={$url_arr[2]}";
+                break;
+            case 2:
+                $new = "/index.php?r={$url_arr[0]}/{$url_arr[1]}/{$url_arr[2]}";
+                break;
+            case 3:
+                $new = "/{$url_arr[0]}/{$url_arr[1]}/{$url_arr[2]}";
+                break;
+            default:
+                break;
+        }
+
+        switch ($type) {
+            case 1:
+            case 2:
+                foreach ($param as $pk => $pv) {
+                    $new .= "&{$pk}={$pv}";
+                }
+                break;
+            case 3:
+                foreach ($param as $pk => $pv) {
+                    $new .= "/{$pk}/{$pv}";
+                }
+                break;
+            default:
+                break;
+        }
+
+        return $new;
+
+    }
+
 }

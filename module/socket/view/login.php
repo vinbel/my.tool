@@ -6,7 +6,7 @@
     <script type="text/javascript" src="/assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form method="post" action="index.php?m=socket&c=index&a=login_post">
+<form method="post" action="<?php echo $post_url;?>">
     <div class="form-group">
         <label for="username">用户名</label>
         <input type="text" class="form-control" name="username" id="usename" placeholder="请输入用户名">

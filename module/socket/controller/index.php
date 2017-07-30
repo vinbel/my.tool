@@ -80,7 +80,6 @@ class index_controller extends \core\m_controller\m_controller
                 $server->push($room_fd, json_encode($send_data));
             }
 
-//    $serv->finish(1234);
         });
 
         $server->on('Finish', function (swoole_server $serv, $task_id, $data) {
@@ -97,13 +96,9 @@ class index_controller extends \core\m_controller\m_controller
         $client = new \lib\m_web_socket\WebSocketClient($host, $prot);
         $data = $client->connect();
 
-
         while (true) {
             $client->send("{\"user_id\":1,\"room_id\":1,\"act\":\"init\",\"msg\":\"\"}");
-
             $tmp = $client->recv();
-            print_r($tmp);
-
             break;
             sleep(1);
         }
@@ -126,11 +121,13 @@ class index_controller extends \core\m_controller\m_controller
 
         $_SESSION['user'] = $user;
 
-        header('Location:index.php?m=socket&c=index&a=index');
+        $index_url = $this->create_url('socket/index/index');
+        header('Location:' . $index_url);
     }
 
     public function act_login() {
-        $this->view('socket/login');
+        $post_url = $this->create_url('socket/index/login_post');
+        $this->view('socket/login', array('post_url' => $post_url));
         $this->display();
     }
 

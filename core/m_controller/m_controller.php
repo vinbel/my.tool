@@ -47,7 +47,10 @@ class m_controller {
      * @param string $module
      * @return \core\m_model\m_model
      */
-    public function load_model($name, $module = 'index') {
+    public function load_model($name, $module = '') {
+
+        if(empty($module)) $module = $this->_module_name;
+
         $file = WEB_ROOT . 'module/' . $module . '/model/' . $name . '.php';
 
         try {

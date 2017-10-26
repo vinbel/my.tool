@@ -17,6 +17,24 @@ class m_controller {
     public $_module = false;
     public $_module_name = '';
     public $debug = false;
+    /**
+     * @var int 返回类型 1.html 2.json 3.csv
+     */
+    public $return_type = 1;
+
+    public $error_rtn = array(
+        'status' => 2,
+        'msg' => 'error',
+        'data' => [],
+    );
+
+    public $success_rtn = array(
+        'status' => 0,
+        'msg' => 'success',
+        'data' => [],
+    );
+
+
 
     public function __construct()
     {
@@ -120,6 +138,7 @@ class m_controller {
      * @param $param
      */
     public function json_view($param) {
+        header('Content-type: application/json');
         $this->out_str = json_encode($param);
     }
 
@@ -140,9 +159,24 @@ class m_controller {
         exit;
     }
 
-    public function out_csv() {
+    public function out_csv($arr) {
 
+        $lines = '';
+
+        foreach ($arr as $val) {
+            $line = implode(',', $val) . "\n";
+            $lines .= iconv('utf-8','gb2312',$line);
+        }
+
+        $filename = date('Ymd').'.csv'; //设置文件名
+        header("Content-type:text/csv");
+        header("Content-Disposition:attachment;filename=".$filename);
+        header('Cache-Control:must-revalidate,post-check=0,pre-check=0');
+        header('Expires:0');
+        header('Pragma:public');
+        $this->out_str = $lines;
     }
+
 
     /**
      * create url
@@ -206,6 +240,74 @@ class m_controller {
         }
 
         return $new;
+
+    }
+
+    public function input($need, $default = null) {
+        $rtn = $default;
+
+        if(isset($this->router->request[$need])) {
+            $rtn = $this->router->request[$need];
+        }
+
+        return $rtn;
+    }
+
+    public function input_check($need, $default = null, $required = false, $type = null, $text = '') {
+        $rtn = null;
+
+        if(isset($this->router->request[$need])) {
+            $rtn = $this->router->request[$need];
+        }
+
+        if($required && $rtn === null) {
+            $this->to_error($text . "必需");
+        }
+
+        switch ($type) {
+            case 'str':
+                break;
+            case 'num':
+                if(!is_numeric($rtn)) {
+                    $this->to_error($text . "必需为数字类型");
+                }
+                break;
+            case 'nums':
+                $arr = preg_split('/[|,]/', $rtn);
+
+                foreach ($arr as $val) {
+                    if(!is_numeric($val)) {
+                        $this->to_error($text . "必需为数字类型");
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        if(is_null($rtn)) {
+            $rtn = $default;
+        }
+
+        return $rtn;
+    }
+
+    public function to_error($error = '') {
+
+        switch ($this->return_type) {
+
+            case 2:
+                $this->error_rtn['msg'] = $error;
+                $this->out_str = json_encode($this->error_rtn);
+                break;
+            case 3:
+            case 1:
+            default:
+                $this->out_str = $error;
+                break;
+        }
+
+        $this->display();
 
     }
 

@@ -142,6 +142,16 @@ class m_controller {
         $this->out_str = json_encode($param);
     }
 
+    public function json_error($msg) {
+        $this->error_rtn['msg'] = $msg;
+        $this->out_str = json_encode($this->error_rtn);
+    }
+
+    public function json_success($data = array()) {
+        $this->success_rtn['data'] = $data;
+        $this->out_str = json_encode($this->success_rtn);
+    }
+
     /**
      * text outer
      * @param $text

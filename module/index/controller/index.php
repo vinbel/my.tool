@@ -54,4 +54,39 @@ class index_controller extends \core\m_controller\m_controller
 //        $this->json_view($rtn);
         $this->display();
     }
+
+    function act_register() {
+        $username = $this->input_check('username', '', 1, 'str', '用户名');
+        $password = $this->input_check('password', '', 1, 'str', '密码');
+        $re_password = $this->input_check('re_password', '', 1, 'str', '确认密码');
+
+        if($password != $re_password) $this->json_error("两次密码不一致");
+
+//
+//
+//        $arr = array(
+//            'admin' => array(
+//                'username' => 'admin',
+//                'password' => 'admin',
+//                'user_id' => '1',
+//                'token' => '1234'
+//            ),
+//            'test' => array(
+//                'username' => 'test',
+//                'password' => 'test',
+//                'user_id' => '1',
+//                'token' => '111'
+//            ),
+//        );
+//
+//        if(isset($arr[$username]) && $arr[$username]['password'] == $password) {
+//            $this->json_success(array('token' => $arr[$username]['token']));
+//        } else {
+//            $this->json_error('登录失败');
+//        }
+//        $this->json_view($rtn);
+        $this->json_success(array());
+
+        $this->display();
+    }
 }

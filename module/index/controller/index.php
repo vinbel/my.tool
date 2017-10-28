@@ -60,7 +60,11 @@ class index_controller extends \core\m_controller\m_controller
         $password = $this->input_check('password', '', 1, 'str', '密码');
         $re_password = $this->input_check('re_password', '', 1, 'str', '确认密码');
 
-        if($password != $re_password) $this->json_error("两次密码不一致");
+        if($password != $re_password) {
+			$this->json_error("两次密码不一致");
+			$this->display();
+
+		}
 
 //
 //
